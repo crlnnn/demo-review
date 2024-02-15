@@ -8,7 +8,6 @@ beforeEach(() => {
   const URL_COOKIE_BOT =
     'https://consentcdn.cookiebot.com/consentconfig/*/settings.json'
   const URL_CLARITY = 'https://w.clarity.ms/collect'
-  const DIALOG_COOKIE_CONSTENT = '#CybotCookiebotDialog'
   const BTN_COOKIE_CONSENT =
     '#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll'
 

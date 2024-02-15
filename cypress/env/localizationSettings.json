@@ -1,0 +1,49 @@
+{
+  "cz": {
+    "e2e": {
+      "baseUrl": "https://drmax.cz/"
+    },
+    "env": {
+      "locale": "cz"
+    }
+  },
+  "sk": {
+    "e2e": {
+      "baseUrl": "https://drmax.sk/"
+    },
+    "env": {
+      "locale": "sk"
+    },
+    "url": {
+      "incognitoTabMode": "sex-a-zdravie"
+    }
+  },
+  "it": {
+    "e2e": {
+      "baseUrl": "https://drmax.it/"
+    },
+    "env": {
+      "locale": "it"
+    }
+  },
+  "pl": {
+    "e2e": {
+      "baseUrl": "https://drmax.pl/"
+    },
+    "env": {
+      "locale": "pl"
+    }
+  },
+  "ro": {
+    "e2e": {
+      "baseUrl": "https://drmax.ro/"
+    },
+    "env": {
+      "locale": "ro"
+    },
+    "url": {
+      "incognitoTabMode": "cuplu-si-sex",
+      "repairInfo": "/rimedi-per"
+    }
+  }
+}

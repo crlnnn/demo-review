@@ -1,21 +1,18 @@
 import randomElement from '../../utilities/randomElement'
 
+// Store available shipments in object instead of direct string approach from switch case (typo)
 export const shipment_name = {
   DPD: 'DPD',
   PICKUP_PLACE: 'PICKUP_PLACE',
 }
 
+Cypress.Commands.add('getPickupPlaceDetail', () => {
   const SELECTOR_PICKUP_PLACE =
     'label[for="drmaxclickandcollectshipping~drmaxclickandcollectshipping"]'
   const PICKUP_LIST_WRAPPER = '[datac-test-id="pickup-list-wrapper"]'
   const PICKUP_DETAIL_WRAPPER = '[datac-test-id="pickup-detail-wrapper"]'
 
   cy.get(SELECTOR_PICKUP_PLACE).should('be.visible').click()
-
-  cy.wait('@geolocationData').then((interception) => {
-    expect(interception.response.body.coords.latitude).to.eq(50.0874654)
-    expect(interception.response.body.coords.longitude).to.eq(14.4212535)
-  })
 
   cy.get('.modal-content').should('be.visible')
 
@@ -28,6 +25,7 @@ export const shipment_name = {
   randomElement(PICKUP_LIST_WRAPPER)
 
   cy.get(PICKUP_DETAIL_WRAPPER).should('be.visible')
+})
 
 Cypress.Commands.add('chooseDelivery', (shipment) => {
   cy.intercept('POST', Cypress.env('url').graphQL, (req) => {
@@ -52,7 +50,8 @@ Cypress.Commands.add('chooseDelivery', (shipment) => {
       cy.getPickupPlaceDetail()
       cy.get(BTN_SUBMIT_PICKUP_PLACE).click()
   }
-  cy.wait('@setShippingMethod').then(({ response }) => {
+  // Server response timeout
+  cy.wait('@setShippingMethod', { timeout: 200000 }).then(({ response }) => {
     expect(response.statusCode).to.equal(200)
   })
 

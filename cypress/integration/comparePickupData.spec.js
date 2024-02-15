@@ -1,7 +1,5 @@
 describe('Pickup place data', () => {
-  if (Cypress.env('locale') === 'cs') {
-    cy.get(CART_DELIVERY_AREA).should('be.visible')
-
+  if (Cypress.env('locale') === 'cz') {
     it('Compare opening hours shown on FE with BE response data', () => {
       const URL_API_PHARMACIES_LIST =
         'https://pharmacy.drmax.cz/api/v1/public/pharmacies/*'

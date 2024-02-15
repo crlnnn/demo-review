@@ -1,9 +1,6 @@
 beforeEach(() => {
-  cy.intercept('GET', '**/graphql?query=query(*').as('graphqlDataLoad')
-  cy.intercept(
-    'POST',
-    '**.drmax.cz/rest/default/V1/delivery-calculation/separate'
-  )
+  const PATH_GRAPHQL_QUERY = '**/graphql?query=query(*'
+  cy.intercept('GET', PATH_GRAPHQL_QUERY).as('graphqlDataLoad')
 })
 
 function waitForGraphQLDataLoadAndAssert() {
@@ -23,6 +20,9 @@ function assertCartFormAndItemDeliveryVisibility() {
     cy.get(CART_DELIVERY_AREA).should('be.visible')
   }
 }
+
+const BTN_CART_CONTINUE = '[data-test-id="checkout-continue-button"]'
+const FORM_CART = 'form[name="stepForm"]'
 
 Cypress.Commands.add('goToCartViaDropdown', () => {
   const HEADER_ICON_CART_LINK = '[data-test-id="microcart-button"]'
@@ -50,11 +50,15 @@ Cypress.Commands.add('goToCartViaProductDetailModal', () => {
 })
 
 Cypress.Commands.add('goToCartDeliveryStep', () => {
-  const BTN_CART_DELIVERY_STEP = '[data-test-id="checkout-continue-button"]'
-  const FORM_DELIVERY = 'form[name="stepForm"]'
-
-  cy.get(BTN_CART_DELIVERY_STEP).should('not.have.class', 'disabled').click()
+  cy.get(BTN_CART_CONTINUE).should('not.have.class', 'disabled').click()
   waitForGraphQLDataLoadAndAssert()
 
-  cy.get(FORM_DELIVERY).should('be.visible')
+  cy.get(FORM_CART).should('be.visible')
+})
+
+Cypress.Commands.add('goToCartAddressStep', () => {
+  cy.get(BTN_CART_CONTINUE).click()
+  waitForGraphQLDataLoadAndAssert
+
+  cy.get(FORM_CART).should('be.visible')
 })

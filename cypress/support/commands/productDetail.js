@@ -1,9 +1,9 @@
 import randomElement from '../utilities/randomElement'
 
 Cypress.Commands.add('goToRandomProductDetail', () => {
-  cy.intercept('GET', '**/_e?index=drmax_frontend_product_attachment_1**').as(
-    'esProductAttachments'
-  )
+  const PATH_ES_PRODUCT_ATTACH =
+    '**/_e?index=drmax_frontend_product_attachment_1**'
+  cy.intercept('GET', PATH_ES_PRODUCT_ATTACH).as('esProductAttachments')
 
   const PRODUCT_GRID = '[data-test-id="product_grid"]'
   const PRODUCT_TILE_CATALOG =

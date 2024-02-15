@@ -2,7 +2,7 @@ const { defineConfig } = require('cypress')
 const { initPlugin } = require('./cypress/plugins/index.js')
 
 module.exports = defineConfig({
-  chromeWebSecurity: true,
+  chromeWebSecurity: false,
   videoUploadOnPasses: false,
   watchForFileChanges: false,
   pageLoadTimeout: 90000,
